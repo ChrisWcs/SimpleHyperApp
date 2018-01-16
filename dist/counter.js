@@ -359,41 +359,18 @@ function app(state, actions, view, container) {
 var _hyperapp = require("hyperapp");
 
 var state = {
-  count: 0
+  value: ""
 };
 
 var actions = {
-  down: function down() {
-    return function (state) {
-      return { count: state.count - 1 };
-    };
-  },
-  up: function up() {
-    return function (state) {
-      return { count: state.count + 1 };
-    };
-  }
+  //change: (target) => state => ({ value: target.event.value })
 };
 
 var view = function view(state, actions) {
   return (0, _hyperapp.h)(
     "main",
     null,
-    (0, _hyperapp.h)(
-      "h1",
-      null,
-      state.count
-    ),
-    (0, _hyperapp.h)(
-      "button",
-      { onclick: actions.down },
-      "-"
-    ),
-    (0, _hyperapp.h)(
-      "button",
-      { onclick: actions.up },
-      "+"
-    )
+    (0, _hyperapp.h)("input", { type: "text", value: state.value /*onChange={actions.change}*/ })
   );
 };
 
@@ -416,7 +393,7 @@ function Module() {
 module.bundle.Module = Module;
 
 if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
-  var ws = new WebSocket('ws://' + window.location.hostname + ':63488/');
+  var ws = new WebSocket('ws://' + window.location.hostname + ':49754/');
   ws.onmessage = function(event) {
     var data = JSON.parse(event.data);
 
